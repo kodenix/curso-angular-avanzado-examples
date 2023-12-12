@@ -1,4 +1,4 @@
-import { Routes } from '@angular/router';
+import { ResolveFn, Routes } from '@angular/router';
 import { InicioComponent } from './inicio/inicio.component';
 import { SimpleTemplateForm1Component } from './forms/simple-template-form1/simple-template-form1.component';
 import { SimpleTemplateForm2Component } from './forms/simple-template-form2/simple-template-form2.component';
@@ -18,6 +18,11 @@ import { Defer1Component } from './template-syntax/defer/defer-1/defer-1.compone
 import { ChangeDetContainerComponent } from './change-detection/change-det-container/change-det-container.component';
 import { ExampleSignalComponent } from './change-detection/example-signal/example-signal.component';
 import { RoutingExampleContainerComponent } from './routing/routing-example-container/routing-example-container.component';
+import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.component';
+import { ChildRoute1Component } from './routing/routing-example-container/child-route1/child-route1.component';
+import { ChildRoute2Component } from './routing/routing-example-container/child-route2/child-route2.component';
+
+const resolvedChildATitle: ResolveFn<string> = () => Promise.resolve('child aaa');
 
 export const routes: Routes = [
   { path: 'temp-form-1', component: SimpleTemplateForm1Component },
@@ -37,6 +42,29 @@ export const routes: Routes = [
   { path: 'defer-1', component: Defer1Component },
   { path: 'change-detection', component: ChangeDetContainerComponent },
   { path: 'signal', component: ExampleSignalComponent },
-  { path: 'routing', component: RoutingExampleContainerComponent },
-  { path: '', component: InicioComponent },
+  { path: 'routing', component: RoutingExampleContainerComponent, title: 'Ejemplo routing',
+    children: [
+      {
+        path: 'first-child', // child route path
+        component: ChildRoute1Component, // child route component that the router renders,
+        title: resolvedChildATitle,
+      },
+      {
+        path: 'second-child',
+        title: 'second',
+        component: ChildRoute2Component, // another child route component that the router renders
+      },
+    ],
+  },
+  { path: 'routing/:id', component: RoutingExampleContainerComponent, title: 'Ejemplo routing 2', data: { customTitle: 'Ejemplo routing con parametro'},
+    children: [
+      {
+        path: 'first-child', // child route path
+        component: ChildRoute1Component, // child route component that the router renders
+      },
+    ],
+  },
+  { path: 'main', component: InicioComponent },
+  { path: '', redirectTo: '/main', pathMatch: 'full' },
+  { path: '**', component: PageNotFoundComponent },
 ];

@@ -1,1 +1,14 @@
-<p>routing-example-container works!</p>
+<h3>Ejemplos de routing</h3>
+<div>
+  <nav>
+    <ul>
+      <li><a routerLink="first-child">Primer Hijo</a></li>
+      <li><a routerLink="second-child">Segundo Hijo</a></li>
+      <li><a routerLink="12/first-child">Primer hijo dentro del path del padre</a></li>
+    </ul>
+  </nav>
+  <router-outlet></router-outlet>
+</div>
+<p>
+  Path param Id actual es: {{ currentId }}
+</p>
