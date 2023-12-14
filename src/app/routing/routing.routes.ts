@@ -1,3 +1,5 @@
+import { ChildRoute2Component } from './routing-example-container/child-route2/child-route2.component';
+import { ChildRoute3Component } from './routing-example-container/child-route3/child-route3.component';
 import { RoutingExampleContainerComponent } from './routing-example-container/routing-example-container.component';
 import { ResolveFn, Routes } from '@angular/router';
 
@@ -14,4 +16,16 @@ export const routingRoutes: Routes = [
         loadComponent: ()=>import('./routing-example-container/child-route2/child-route2.component').then(x => x.ChildRoute2Component),
         title: 'second',
       },
+      { 
+        path: 'path-popup', 
+        component: ChildRoute3Component, 
+        outlet: 'popup' 
+      },
+      { 
+        path: 'closed', 
+        component: ChildRoute2Component,
+        outlet: 'popup',
+        
+      }
+
 ]

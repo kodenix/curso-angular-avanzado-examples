@@ -1,13 +1,25 @@
-<h3>Ejemplos de routing</h3>
-<div>
-  <nav>
-    <ul>
-      <li><a class="button" routerLink="/routing/child-route1" routerLinkActive="activebutton">Primer Hijo</a></li>
-      <li><a class="button" routerLink="/routing/child-route2" routerLinkActive="activebutton">Segundo Hijo</a></li>
-    </ul>
-  </nav>
-  <router-outlet></router-outlet>
+<div class="main-container">
+  <div>
+    <h3>Ejemplos de routing</h3>
+    <nav>
+      <ul>
+        <li><a class="button" routerLink="/routing/child-route1" routerLinkActive="activebutton">Primer Hijo</a></li>
+        <li><a class="button" routerLink="/routing/child-route2" routerLinkActive="activebutton">Segundo Hijo</a></li>
+        <li><a class="button" routerLink="/routing/vertical" routerLinkActive="activebutton">Seccion vertical</a></li>
+      </ul>
+    </nav>
+    <div>
+      <button [routerLink]="[{ outlets: { popup: ['path-popup'] } }]">Open popup</button>
+      <button (click)="openPopup()">Open popup</button>
+      <button (click)="closePopup()">Close popup</button>
+    </div>
+    <router-outlet></router-outlet>
+  </div>
+  <div class="vertical-section" [hidden]="isInactive()">
+    <router-outlet name="popup" (activate)="popupActivado()" (deactivate)="popupDesactivado()" (detach)="popupDesatachado()"></router-outlet>
+  </div>
 </div>
+
 <!-- <p>
   Path param Id actual es: {{ currentId }}
 </p> -->
