@@ -42,28 +42,32 @@ export const routes: Routes = [
   { path: 'defer-1', component: Defer1Component },
   { path: 'change-detection', component: ChangeDetContainerComponent },
   { path: 'signal', component: ExampleSignalComponent },
-  { path: 'routing', component: RoutingExampleContainerComponent, title: 'Ejemplo routing',
-    children: [
-      {
-        path: 'first-child', // child route path
-        component: ChildRoute1Component, // child route component that the router renders,
-        title: resolvedChildATitle,
-      },
-      {
-        path: 'second-child',
-        title: 'second',
-        component: ChildRoute2Component, // another child route component that the router renders
-      },
-    ],
+  {
+    path: 'routing',
+    loadComponent: ()=>import('./routing/routing-example-container/routing-example-container.component').then(x => x.RoutingExampleContainerComponent),
+    title: 'Ejemplo routing',
+    loadChildren: () => import('./routing/routing.routes').then(x => x.routingRoutes)
+    // children: [
+    //   {
+    //     path: 'child-route1', // child route path
+    //     component: ChildRoute1Component, // child route component that the router renders,
+    //     title: resolvedChildATitle,
+    //   },
+    //   {
+    //     path: 'child-route2',
+    //     title: 'second',
+    //     component: ChildRoute2Component, // another child route component that the router renders
+    //   },
+    // ],
   },
-  { path: 'routing/:id', component: RoutingExampleContainerComponent, title: 'Ejemplo routing 2', data: { customTitle: 'Ejemplo routing con parametro'},
-    children: [
-      {
-        path: 'first-child', // child route path
-        component: ChildRoute1Component, // child route component that the router renders
-      },
-    ],
-  },
+  // { path: 'routing/:id', component: RoutingExampleContainerComponent, title: 'Ejemplo routing 2', data: { customTitle: 'Ejemplo routing con parametro'},
+  //   children: [
+  //     {
+  //       path: 'first-child', // child route path
+  //       component: ChildRoute1Component, // child route component that the router renders
+  //     },
+  //   ],
+  // },
   { path: 'main', component: InicioComponent },
   { path: '', redirectTo: '/main', pathMatch: 'full' },
   { path: '**', component: PageNotFoundComponent },
