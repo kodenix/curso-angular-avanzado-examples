@@ -21,6 +21,7 @@ import { RoutingExampleContainerComponent } from './routing/routing-example-cont
 import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.component';
 import { ChildRoute1Component } from './routing/routing-example-container/child-route1/child-route1.component';
 import { ChildRoute2Component } from './routing/routing-example-container/child-route2/child-route2.component';
+import { existTokenGuard } from './guards/exist-token.guard';
 
 const resolvedChildATitle: ResolveFn<string> = () => Promise.resolve('child aaa');
 
@@ -41,7 +42,7 @@ export const routes: Routes = [
   { path: 'switch-block-control', component: SwitchStructControlComponent },
   { path: 'defer-1', component: Defer1Component },
   { path: 'change-detection', component: ChangeDetContainerComponent },
-  { path: 'signal', component: ExampleSignalComponent },
+  { path: 'signal', component: ExampleSignalComponent, canActivate: [existTokenGuard] },
   {
     path: 'routing',
     loadComponent: ()=>import('./routing/routing-example-container/routing-example-container.component').then(x => x.RoutingExampleContainerComponent),
