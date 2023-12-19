@@ -41,6 +41,7 @@ export const routes: Routes = [
     loadChildren: ()=>import('./routing/routing-example-container/routing-example-container.routes').then(x => x.routesChildExampleContainer)
   },
   { path: 'routing/:id', loadComponent: ()=>import('./routing/routing-example-container/routing-example-container.component').then(x => x.RoutingExampleContainerComponent) },
+  { path: 'http-client-example', loadComponent: ()=>import('./http-client-example/http-client-example.component').then(x => x.HttpClientExampleComponent) },
   { path: 'main', component: InicioComponent, title: 'Main' },
   { path: '', redirectTo: '/main', pathMatch: 'full'},
   { path: '**', component: NotFoundPageComponent },
