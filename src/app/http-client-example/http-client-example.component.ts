@@ -10,6 +10,7 @@ import { ApiService, RicMorCharacter } from '../services/api.service';
     <div>
       <button (click)="prevPage()" [disabled]="!activedPrevButton()">prev page</button>  
       <button (click)="nextPage()" [disabled]="!activedNextButton()">next page</button>
+      <button (click)="nextPageV2()" [disabled]="!activedNextButton()">next page v2</button>
     </div>
     <div>
       <h2>Pagination</h2>
@@ -53,6 +54,11 @@ export class HttpClientExampleComponent implements OnInit {
 
   nextPage() {
     this.apiService.getNextPage();
+  }
+
+  nextPageV2() {
+    this.apiService.getNextPageWithObserver();
+    // this.apiService.getNextPageWithcatchErrorOperator();
   }
 
   prevPage() {
