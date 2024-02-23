@@ -37,7 +37,7 @@ fdescribe('ComponentTesteable3Component', () => {
 
   it('should display a h1 with same value of title 1', () => {
     fixture.detectChanges();
-    const titulo = 'Titulo por defecto';
+    const titulo = 'Titulo por defecto2';
     expect(h1.textContent).toContain(titulo);
   })
 
